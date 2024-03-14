@@ -2,7 +2,7 @@
 
 export default interface User{
   id?: string,
-  mame: string,
+  name: string,
   email: string,
   password: string,
   position: string,

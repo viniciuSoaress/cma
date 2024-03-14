@@ -1,3 +1,3 @@
-export default interface CasoDeUso<E, S> {
+export default interface UseCase<E, S> {
   handle(data: E): Promise<S>
 }
