@@ -2,6 +2,7 @@
   "material-icon-theme.folders.associations": {
     "external": "tools",
     "core": "rules",
-    "adapters": "pipe"
+    "adapters": "pipe",
+    "user": "admin"
   }
 }
