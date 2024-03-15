@@ -12,12 +12,21 @@ export default class PartDbPrisma implements DbPart {
   }
 
   async createPart(data: Part): Promise<Part> {
-    throw new Error("Method not implemented.");
+    return await this.prisma.part.create({ data })
+
   }
+
   async getParts(): Promise<Part[]> {
-    throw new Error("Method not implemented.");
+    return await this.prisma.part.findMany({
+      orderBy: {
+        name: "asc"
+      }
+    })
   }
+
   async deletePart(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    await this.prisma.part.delete({
+      where: { id }
+    })
   }
 }

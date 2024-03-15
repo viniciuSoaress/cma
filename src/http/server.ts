@@ -1,6 +1,7 @@
 import express from "express";
 import cors from 'cors'
 import userRouter from "../routers/user";
+import partRouter from "../routers/part";
 
 const server = express()
 const port = process.env.PORT || 8182
@@ -15,6 +16,7 @@ server.get('/cma', (_, res) => {
 })
 
 server.use('/user', userRouter)
+server.use('/part', partRouter)
 
 server.listen(port, () => {
   console.log(`server in running, URL: http://localhost:${port}`)

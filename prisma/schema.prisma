@@ -20,5 +20,5 @@ model User {
 model Part{
   id String @id @default(uuid())
   name String
-  price Decimal
+  price Float
 }
