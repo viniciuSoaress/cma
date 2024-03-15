@@ -15,15 +15,15 @@ export default class UserDbPrisma implements UserDb {
     return await this.prisma.user.findUnique({
       where: { email }
     }) ?? undefined
- 
+
   }
 
   async createUser(data: User): Promise<User> {
-    const newUser = await this.prisma.user.create({
+    return await this.prisma.user.create({
       data
     })
 
-    return newUser
+
   }
 
   async putPasswordUser(email: string, password: string): Promise<void> {
