@@ -1,5 +1,6 @@
 import { Router } from "express";
 import PartRegistration from "../../core/part/service/partRegistration";
+import { z } from 'zod'
 
 export default class PartRegistrationController {
 
@@ -9,9 +10,14 @@ export default class PartRegistrationController {
   ) {
     server.post('/', async (req, res, next) => {
       try {
-        const { name, price } = req.body as any
 
-       const part = await useCase.handle({ name, price })
+        const partSchemaBody = z.object({
+          name: z.string(),
+          price: z.coerce.number()
+        })
+
+        const { name, price } = partSchemaBody.parse(req.body)
+        const part = await useCase.handle({ name, price })
 
         res.status(201).send(part)
 
