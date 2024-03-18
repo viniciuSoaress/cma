@@ -6,7 +6,7 @@ type Part = {
   price: number
 }
 
-export default class PartRegistration implements UseCase<Part, Part>{
+export default class CreatingPart implements UseCase<Part, Part>{
 
   constructor(private readonly dbPart: DbPart){}
 

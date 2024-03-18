@@ -1,12 +1,12 @@
 import { Router } from "express";
-import PartRegistration from "../../core/part/service/partRegistration";
+import CreatingPart from "../../core/part/service/creatingPart";
 import { z } from 'zod'
 
-export default class PartRegistrationController {
+export default class CreatingPartController {
 
   constructor(
     server: Router,
-    useCase: PartRegistration
+    useCase: CreatingPart
   ) {
     server.post('/', async (req, res, next) => {
       try {

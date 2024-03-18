@@ -1,15 +1,14 @@
 import { Router } from "express";
 import PartDbPrisma from "../external/partDbPrisma";
-import PartRegistration from "../core/part/service/partRegistration";
-import PartRegistrationController from "../adapters/part/partRegistrationController";
+import CreatingPart from "../core/part/service/creatingPart";
+import CreatingPartController from "../adapters/part/creatingPartController";
 
 const partRouter = Router()
 
-
 const PartDb = new PartDbPrisma()
 
-const regitration = new PartRegistration(PartDb)
-new PartRegistrationController(partRouter, regitration)
+const regitration = new CreatingPart(PartDb)
+new CreatingPartController(partRouter, regitration)
 
 
 export default partRouter
