@@ -9,7 +9,7 @@ type User = {
   access_level: string,
 }
 
-export default class UserRedistration implements UseCase<User, void | User> {
+export default class CreatingUser implements UseCase<User, void | User> {
 
   constructor(private readonly dbUser: UserDb) { }
 

@@ -1,13 +1,13 @@
 import { Router } from "express";
-import UserPutPassword from "../../core/user/service/userPutPassword";
+import UpdatePassword from "../../core/user/service/updateUserPassword";
 import { z } from 'zod'
 
 
-export default class PutPassowrdController {
+export default class UpdateUserPassowrdController {
 
   constructor(
     server: Router,
-    useCase: UserPutPassword
+    useCase: UpdatePassword
   ) {
     server.patch('/:email', async (req, res, next) => {
       try {

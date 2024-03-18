@@ -1,12 +1,15 @@
 import { Router } from "express";
 
-import UserRedistration from "../core/user/service/userRegistration";
-import RegistrationController from "../adapters/user/registrationController";
+import CreatingUser from "../core/user/service/creatingUser";
+import CreatingUserController from "../adapters/user/creatingUserController";
+
 import UserDbPrisma from "../external/userDbPrisma";
-import UserPutPassword from "../core/user/service/userPutPassword";
-import PutPassowrdController from "../adapters/user/putPasswordController";
-import UserGetEmail from "../core/user/service/userGetEmail";
-import GetEmailController from "../adapters/user/getEmailController";
+
+import UpdateUserPassword from "../core/user/service/updateUserPassword";
+import UpdateUserPassowrdController from "../adapters/user/updateUserPassworController";
+
+import SearchUser from "../core/user/service/searchForUserByEmail";
+import SearchForUserByEmailController from "../adapters/user/searchForUserByEmailController";
 
 
 
@@ -14,13 +17,13 @@ const userRouter = Router()
 
 const userDbPrisma = new UserDbPrisma()
 
-const userRegistration = new UserRedistration(userDbPrisma)
-new RegistrationController(userRouter, userRegistration)
+const createUser = new CreatingUser(userDbPrisma)
+new CreatingUserController(userRouter, createUser)
 
-const UserPutPassowrd = new UserPutPassword(userDbPrisma)
-new PutPassowrdController(userRouter, UserPutPassowrd)
+const UserPutPassowrd = new UpdateUserPassword(userDbPrisma)
+new UpdateUserPassowrdController(userRouter, UserPutPassowrd)
 
-const getEmail = new UserGetEmail(userDbPrisma)
-new GetEmailController(userRouter, getEmail)
+const getEmail = new SearchUser(userDbPrisma)
+new SearchForUserByEmailController(userRouter, getEmail)
 
 export default userRouter

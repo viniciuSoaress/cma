@@ -2,7 +2,7 @@ import UseCase from "../../shared/useCase";
 import User from "../model/user";
 import UserDb from "./userDb";
 
-export default class UserGetEmail implements UseCase<string, User | void>{
+export default class SearchForUserByEmail implements UseCase<string, User | void>{
 
   constructor(private readonly dbUser: UserDb){}
 

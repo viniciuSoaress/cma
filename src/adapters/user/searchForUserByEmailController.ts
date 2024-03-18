@@ -1,18 +1,18 @@
 import { Router } from "express";
-import UserGetEmail from "../../core/user/service/userGetEmail";
+import SearchEmail from "../../core/user/service/searchForUserByEmail";
 import { z } from 'zod'
 
-export default class GetEmailController {
+export default class SearchForUserByEmailController {
 
   constructor(
     server: Router,
-    useCase: UserGetEmail
+    useCase: SearchEmail
   ) {
     server.get('/:email', async (req, res, next) => {
       try {
         const emailSchema = z.string().email()
 
-        const email = emailSchema.parse(req.params.email)
+        const email = emailSchema.parse(req.params)
         const user = await useCase.handle(email)
 
         res.send(user)

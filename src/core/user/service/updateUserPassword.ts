@@ -6,7 +6,7 @@ type PutUser = {
   password: string
 }
 
-export default class UserPutPassword implements UseCase<PutUser, void>{
+export default class UpdateUserPassword implements UseCase<PutUser, void>{
 
   constructor(private readonly dbUser: UserDb) { }
 

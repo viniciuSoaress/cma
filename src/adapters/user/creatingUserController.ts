@@ -1,11 +1,11 @@
 import { Router } from "express";
-import UserRedistration from "../../core/user/service/userRegistration";
+import CreatingUser from "../../core/user/service/creatingUser";
 import {z} from 'zod'
 
-export default class RegistrationController {
+export default class CreatingUserController {
   constructor(
     server: Router,
-    useCase: UserRedistration
+    useCase: CreatingUser
   ) {
     server.post('/', async (req, res, next) => {
       try {
