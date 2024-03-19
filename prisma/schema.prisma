@@ -9,16 +9,48 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
+  id           String @id @default(uuid())
+  name         String
+  email        String @unique
+  password     String
   access_level String
-  position String
+  position     String
 }
 
-model Part{
-  id String @id @default(uuid())
-  name String
+model Part {
+  id    String @id @default(uuid())
+  name  String
   price Float
+
+  equipmentId String?
+  equipment   Equipment? @relation(fields: [equipmentId], references: [id])
+}
+
+model Client {
+  id           String @id @default(uuid())
+  name         String
+  email        String @unique
+  cnpj         String @unique
+  address      String
+  fone         String
+  company_name String
+
+  createdAt  DateTime    @default(now())
+  updatedAt DateTime @updatedAt
+
+  equipments Equipment[]
+}
+
+model Equipment {
+  id          String @id @default(uuid())
+  name        String
+  brand       String
+  model       String
+  labor_value Float
+  defect      String
+
+  clientId String @unique
+  client   Client @relation(fields: [clientId], references: [id])
+
+  parts Part[]
 }
