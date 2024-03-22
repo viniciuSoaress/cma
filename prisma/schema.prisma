@@ -18,39 +18,66 @@ model User {
 }
 
 model Part {
-  id    String @id @default(uuid())
+  id String @id @default(uuid())
+
   name  String
   price Float
-
-  equipmentId String?
-  equipment   Equipment? @relation(fields: [equipmentId], references: [id])
 }
 
 model Client {
-  id           String @id @default(uuid())
+  id String @id @default(uuid())
+
   name         String
-  email        String @unique
-  cnpj         String @unique
-  address      String
-  fone         String
+  email        String  @unique
+  cnpj_cpf     String  @unique
+  date_contact String
+  fone         String?
+  cell_phone   String
   company_name String
 
-  createdAt  DateTime    @default(now())
+  createdAt String
+
   updatedAt DateTime @updatedAt
 
   equipments Equipment[]
+  address    Address?
+}
+
+model Address {
+  id String @id @default(uuid())
+
+  number       Float
+  cep          String
+  neighborhood String
+  city         String
+  state        String
+
+  clientId String @unique
+  cleint   Client @relation(fields: [clientId], references: [id])
 }
 
 model Equipment {
-  id          String @id @default(uuid())
-  name        String
-  brand       String
-  model       String
-  labor_value Float
-  defect      String
+  id String @id @default(uuid())
 
-  clientId String @unique
+  name   String
+  brand  String
+  model  String
+  defect String
+
+  clientId String
   client   Client @relation(fields: [clientId], references: [id])
 
-  parts Part[]
+  parts PartEquipment[]
+}
+
+model PartEquipment {
+  id String @id @default(uuid())
+
+  name        String
+  price       Float
+  labor_value Float
+  quantit     Int
+
+  equippmentId String
+  equipment    Equipment @relation(fields: [equippmentId], references: [id])
 }
