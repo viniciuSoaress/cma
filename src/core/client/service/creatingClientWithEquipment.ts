@@ -16,6 +16,12 @@ type Client = {
     model: string;
     labor_value: number;
     defect: string;
+    parts: {
+      name: string,
+      price: number,
+      labor_value: number,
+      quantit: number
+    }[]
   }[],
   address: {
     number: number,
