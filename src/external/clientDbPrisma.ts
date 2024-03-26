@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import ClientDb from "../core/client/service/clientDb";
-import Client from "../core/client/model/client";
+import Client, { Equipment } from "../core/client/model/client";
 
 
 export default class ClientDbPrisma implements ClientDb {
@@ -10,10 +10,8 @@ export default class ClientDbPrisma implements ClientDb {
 
 
   async createClientWithEquipment(data: Client): Promise<void> {
-    
+
     const { address, cnpj_cpf, email, fone, name, equipments, company_name, cell_phone, createdAt, date_contact } = data
-
-
 
     const client = await this.prisma.client.create({
       data: {
@@ -71,4 +69,41 @@ export default class ClientDbPrisma implements ClientDb {
 
   }
 
+  async createClientEquipment(clientId: string, data: Equipment[]): Promise<void> {
+    for (const equipment of data) {
+      await this.prisma.equipment.create({
+        data: {
+          brand: equipment.brand,
+          name: equipment.name,
+          defect: equipment.defect,
+          model: equipment.model,
+          clientId: clientId,
+          parts: {
+            create: equipment.parts.map(part => ({
+              labor_value: part.labor_value,
+              name: part.name,
+              price: part.price,
+              quantit: part.quantit
+            }))
+          }
+        }
+      })
+    }
+  }
+
+  async searchClientByCnpj(cnpj: string): Promise<Client | void> {
+    return await this.prisma.client.findUnique({
+      where: {
+        cnpj_cpf: cnpj
+      },
+      include: {
+        address: true,
+        equipments: {
+          include: {
+            parts: true
+          }
+        }
+      }
+    }) ?? undefined
+  }
 }

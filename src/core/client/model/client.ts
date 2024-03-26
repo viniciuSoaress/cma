@@ -12,7 +12,7 @@ export default interface Client {
   equipments: Equipment[]
 }
 
-interface Equipment {
+export interface Equipment {
   id?: string,
   name: string;
   brand: string;
