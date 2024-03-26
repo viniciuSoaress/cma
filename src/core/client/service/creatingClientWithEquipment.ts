@@ -14,7 +14,6 @@ type Client = {
     name: string;
     brand: string;
     model: string;
-    labor_value: number;
     defect: string;
     parts: {
       name: string,
