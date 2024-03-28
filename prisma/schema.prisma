@@ -10,6 +10,7 @@ datasource db {
 
 model User {
   id           String @id @default(uuid())
+  
   name         String
   email        String @unique
   password     String
@@ -36,7 +37,6 @@ model Client {
   company_name String
 
   createdAt String
-
   updatedAt DateTime @updatedAt
 
   equipments Equipment[]
@@ -68,6 +68,7 @@ model Equipment {
   client   Client @relation(fields: [clientId], references: [id])
 
   parts PartEquipment[]
+  budget Budget?
 }
 
 model PartEquipment {
@@ -80,4 +81,15 @@ model PartEquipment {
 
   equippmentId String
   equipment    Equipment @relation(fields: [equippmentId], references: [id])
+}
+
+
+model Budget{
+  id String @id @default(uuid())
+
+  date_delivery String
+  date_entry String
+
+  equipmentId String @unique
+  equipment Equipment @relation(fields: [equipmentId], references: [id]) 
 }
