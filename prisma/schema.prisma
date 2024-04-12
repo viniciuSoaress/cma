@@ -9,8 +9,8 @@ datasource db {
 }
 
 model User {
-  id           String @id @default(uuid())
-  
+  id String @id @default(uuid())
+
   name         String
   email        String @unique
   password     String
@@ -41,6 +41,7 @@ model Client {
 
   equipments Equipment[]
   address    Address?
+  budgets Budget[]
 }
 
 model Address {
@@ -67,7 +68,7 @@ model Equipment {
   clientId String
   client   Client @relation(fields: [clientId], references: [id])
 
-  parts PartEquipment[]
+  parts  PartEquipment[]
   budget Budget?
 }
 
@@ -83,13 +84,16 @@ model PartEquipment {
   equipment    Equipment @relation(fields: [equippmentId], references: [id])
 }
 
-
-model Budget{
+model Budget {
   id String @id @default(uuid())
 
   date_delivery String
-  date_entry String
+  date_entry    String
 
-  equipmentId String @unique
-  equipment Equipment @relation(fields: [equipmentId], references: [id]) 
+  equipmentId String    @unique
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+
+
+  client Client @relation(fields: [clientId], references: [id])
+  clientId String
 }
