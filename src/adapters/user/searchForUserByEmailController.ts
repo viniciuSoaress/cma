@@ -12,7 +12,7 @@ export default class SearchForUserByEmailController {
       try {
         const emailSchema = z.string().email()
 
-        const email = emailSchema.parse(req.params)
+        const email = emailSchema.parse(req.params.email)
         const user = await useCase.handle(email)
 
         res.send(user)

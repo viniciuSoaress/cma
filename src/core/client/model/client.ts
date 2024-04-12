@@ -19,7 +19,8 @@ export interface Equipment {
   model: string;
   defect: string;
   clientI?: string,
-  parts: Part[]
+  parts: Part[],
+  budgetId?: string | null,
 }
 
 interface Address {
