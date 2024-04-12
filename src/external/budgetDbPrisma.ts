@@ -8,9 +8,23 @@ export default class BudgetDbPrisma implements BudgetDb {
 
   constructor() { this.prisma = new PrismaClient() }
 
-  async createBudget(data: { date_delivery: string; date_entry: string; equipmentId: string; }): Promise<Budget> {
+  async createBudget(data: { date_delivery: string; date_entry: string; equipmentId: string }): Promise<Budget> {
+
+    const { date_delivery, date_entry, equipmentId } = data
+
+    const clientId = await this.prisma.equipment.findUnique({
+      where: {
+        id: data.equipmentId
+      }
+    })
+
     return await this.prisma.budget.create({
-      data: data,
+      data: {
+        clientId: clientId?.clientId ?? '',
+        date_delivery,
+        date_entry,
+        equipmentId
+      },
       include: {
         equipment: {
           include: {
@@ -20,8 +34,6 @@ export default class BudgetDbPrisma implements BudgetDb {
       }
     })
   }
-
-
 
   async getBudgetClient(id: string): Promise<Budget | void> {
     return await this.prisma.budget.findUnique({
@@ -36,5 +48,23 @@ export default class BudgetDbPrisma implements BudgetDb {
         }
       }
     }) ?? undefined
+  }
+
+  async getBudgetsClientName(name: string): Promise<Budget[]>{
+    const budgets = await this.prisma.budget.findMany({
+      where: {
+        client: {
+          company_name: name
+        },
+      },
+      include: {
+        equipment: {
+          include: {parts: true}
+        }
+      }
+    })
+
+    console.log(budgets)
+    return budgets
   }
 }

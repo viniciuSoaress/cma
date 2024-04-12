@@ -9,4 +9,5 @@ type Data = {
 export default interface BudgetDb{
   createBudget(data: Data): Promise<Budget>,
   getBudgetClient(id: string): Promise<Budget | void>,
+  getBudgetsClientName(name: string):Promise<Budget[]>
 }
