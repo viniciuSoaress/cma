@@ -2,8 +2,7 @@ import UseCase from "../../shared/useCase";
 import DbPart from "./dbPart";
 
 type Part = {
-  name: string,
-  price: number
+  name: string
 }
 
 export default class CreatingPart implements UseCase<Part, Part>{

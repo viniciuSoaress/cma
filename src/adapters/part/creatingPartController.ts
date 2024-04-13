@@ -12,12 +12,11 @@ export default class CreatingPartController {
       try {
 
         const partSchemaBody = z.object({
-          name: z.string(),
-          price: z.coerce.number()
+          name: z.string()
         })
 
-        const { name, price } = partSchemaBody.parse(req.body)
-        const part = await useCase.handle({ name, price })
+        const { name } = partSchemaBody.parse(req.body)
+        const part = await useCase.handle({ name})
 
         res.status(201).send(part)
 
