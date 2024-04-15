@@ -12,7 +12,7 @@ export default class GetClientsController {
       try {
         const clients = await useCase.handle()
 
-        res.send(clients)
+        res.status(200).send(clients)
       } catch (error) {
         next(error)
       }

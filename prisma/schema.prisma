@@ -27,7 +27,6 @@ model Part {
 model Client {
   id String @id @default(uuid())
 
-  name         String
   email        String  @unique
   cnpj_cpf     String  @unique
   date_contact String
@@ -35,7 +34,7 @@ model Client {
   cell_phone   String
   company_name String
 
-  createdAt String
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   equipments Equipment[]

@@ -14,14 +14,12 @@ export default class CreatingClientWithEquipmentController {
       try {
 
         const clientSchemaBody = z.object({
-          name: z.string(),
           email: z.string().email(),
           cnpj_cpf: z.string(),
           fone: z.string().optional(),
           company_name: z.string(),
           cell_phone: z.string(),
           date_contact: z.string(),
-          createdAt: z.string(),
           address: z.object({
             number: z.number(),
             cep: z.string(),
@@ -43,13 +41,13 @@ export default class CreatingClientWithEquipmentController {
           }))
         });
 
-        const {address, cell_phone, cnpj_cpf, company_name, createdAt, date_contact, email, equipments, name, fone, } = clientSchemaBody.parse(req.body)
+        const { address, cell_phone, cnpj_cpf, company_name, date_contact, email, equipments, fone, } = clientSchemaBody.parse(req.body)
 
 
 
-        await useCase.handle({ address, cnpj_cpf, email, fone, name, company_name, equipments, cell_phone, createdAt, date_contact })
+       const clientId = await useCase.handle({ address, cnpj_cpf, email, fone, company_name, equipments, cell_phone, date_contact })
 
-        res.status(201).send('criando')
+        res.status(201).json({id: clientId})
 
       } catch (error) {
         next(error)

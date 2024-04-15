@@ -1,8 +1,8 @@
 import Client, { Equipment } from "../model/client";
 
 export default interface ClientDb {
-  createClientWithEquipment(data: Client): Promise<void>,
+  createClientWithEquipment(data: Client): Promise<string>,
   searchForCustomers(): Promise<Client[]>,
-  createClientEquipment(clientId:string, data: Equipment[]): Promise<void>,
+  createEquipmentClient(clientId:string, data: Equipment[]): Promise<void>,
   searchClientByCnpj(cnpj:string): Promise<Client | void>
 }

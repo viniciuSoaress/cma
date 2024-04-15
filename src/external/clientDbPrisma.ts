@@ -9,13 +9,13 @@ export default class ClientDbPrisma implements ClientDb {
   constructor() { this.prisma = new PrismaClient() }
 
 
-  async createClientWithEquipment(data: Client): Promise<void> {
+  async createClientWithEquipment(data: Client): Promise<string> {
 
-    const { address, cnpj_cpf, email, fone, name, equipments, company_name, cell_phone, createdAt, date_contact } = data
+    const { address, cnpj_cpf, email, fone, equipments, company_name, cell_phone, date_contact } = data
 
     const client = await this.prisma.client.create({
       data: {
-        cnpj_cpf, company_name, email, fone, name, cell_phone, createdAt, date_contact,
+        cnpj_cpf, company_name, email, fone, cell_phone, date_contact,
       },
     })
 
@@ -53,6 +53,8 @@ export default class ClientDbPrisma implements ClientDb {
         }
       })
     }
+
+    return client.id
   }
 
   async searchForCustomers(): Promise<Client[]> {
@@ -69,7 +71,7 @@ export default class ClientDbPrisma implements ClientDb {
 
   }
 
-  async createClientEquipment(clientId: string, data: Equipment[]): Promise<void> {
+  async createEquipmentClient(clientId: string, data: Equipment[]): Promise<void> {
     for (const equipment of data) {
       await this.prisma.equipment.create({
         data: {

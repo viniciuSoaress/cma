@@ -1,13 +1,11 @@
 export default interface Client {
   id?: string,
-  name: string,
   cnpj_cpf: string,
   email: string,
   fone?: string | null,
   company_name: string,
   cell_phone: string,
   date_contact: string,
-  createdAt: string,
   address: Address | null,
   equipments: Equipment[]
 }

@@ -1,13 +1,13 @@
 import { Router } from "express";
-import CreatingClientEquipment from "../../core/client/service/creatingClientEquipment";
-import {z} from 'zod'
+import CreatingEquipmentClient from "../../core/client/service/createEquipmentClient";
+import { z } from 'zod'
 
 
-export default class CreatingClientEquipmentController {
+export default class CreatingEquipmentClientController {
 
   constructor(
     server: Router,
-    useCase: CreatingClientEquipment
+    useCase: CreatingEquipmentClient
   ) {
     server.post('/equipment/:cnpj', async (req, res, next) => {
       try {
@@ -27,11 +27,11 @@ export default class CreatingClientEquipmentController {
           }))
         })
 
-        const {equipments} = equipmentsSchemaBody.parse(req.body)
+        const { equipments } = equipmentsSchemaBody.parse(req.body)
         const cnpj = req.params.cnpj
 
-        await useCase.handle({cnpj, equipments})
-        res.send('certo')
+        await useCase.handle({ cnpj, equipments })
+        res.status(201).json({ message: 'equipamento criado.' })
       } catch (error) {
         next(error)
       }

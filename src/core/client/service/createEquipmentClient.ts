@@ -20,7 +20,7 @@ type Data = {
   equipments: Equipment[]
 }
 
-export default class CreatingClientEquipment implements UseCase<Data, void>{
+export default class CreateEquipmentClient implements UseCase<Data, void>{
 
   constructor(private readonly dbClient: ClientDb){}
 
@@ -34,6 +34,6 @@ export default class CreatingClientEquipment implements UseCase<Data, void>{
     }
     
 
-    await this.dbClient.createClientEquipment(String(client.id), equipments)
+    await this.dbClient.createEquipmentClient(String(client.id), equipments)
   }
 }

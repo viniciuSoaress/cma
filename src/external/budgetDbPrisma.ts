@@ -12,15 +12,15 @@ export default class BudgetDbPrisma implements BudgetDb {
 
     const { date_delivery, date_entry, equipmentId } = data
 
-    const clientId = await this.prisma.equipment.findUnique({
+    const equipment = await this.prisma.equipment.findUnique({
       where: {
-        id: data.equipmentId
+        id: equipmentId
       }
     })
 
     return await this.prisma.budget.create({
       data: {
-        clientId: clientId?.clientId ?? '',
+        clientId: equipment?.clientId ?? '',
         date_delivery,
         date_entry,
         equipmentId

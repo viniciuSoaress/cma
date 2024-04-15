@@ -2,14 +2,12 @@ import UseCase from "../../shared/useCase";
 import ClientDb from "./clientDb";
 
 type Client = {
-  name: string,
   cnpj_cpf: string,
   email: string,
   fone?: string,
   company_name: string,
   cell_phone: string,
   date_contact: string,
-  createdAt: string,
   equipments: {
     name: string;
     brand: string;
@@ -31,13 +29,24 @@ type Client = {
   },
 }
 
-export default class CreatingClientWithEquipment implements UseCase<Client, void>{
+export default class CreatingClientWithEquipment implements UseCase<Client, string> {
 
   constructor(private readonly DbClient: ClientDb) { }
 
-  async handle(data: Client): Promise<void> {
-    const { address, cnpj_cpf, company_name, email, equipments, fone, name, cell_phone, createdAt, date_contact } = data
+  async handle(data: Client): Promise<string> {
+    const {
+      address,
+      cnpj_cpf,
+      company_name,
+      email,
+      equipments,
+      fone,
+      cell_phone,
+      date_contact
+    } = data
 
-    await this.DbClient.createClientWithEquipment({ address, cnpj_cpf, company_name, email, fone, name, equipments, cell_phone, createdAt, date_contact })
+
+   return await 
+    this.DbClient.createClientWithEquipment({ address, cnpj_cpf, company_name, email, fone, equipments, cell_phone, date_contact })
   }
 }
