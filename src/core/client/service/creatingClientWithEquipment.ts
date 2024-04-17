@@ -45,8 +45,6 @@ export default class CreatingClientWithEquipment implements UseCase<Client, stri
       date_contact
     } = data
 
-
-   return await 
-    this.DbClient.createClientWithEquipment({ address, cnpj_cpf, company_name, email, fone, equipments, cell_phone, date_contact })
+    return await this.DbClient.createClientWithEquipment({ address, cnpj_cpf, company_name, email, fone, equipments, cell_phone, date_contact })
   }
 }

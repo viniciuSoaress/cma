@@ -7,7 +7,7 @@ export default class GetBudgetController{
     server: Router,
     useCase: GetBudget
   ){
-    server.get('/unico/:id', async (req, res, next) => {
+    server.get('/client/unique/:id', async (req, res, next) => {
       try {
         const id = req.params.id
 

@@ -8,10 +8,12 @@ export default class GetClientsController {
     server: Router,
     useCase: GetClients
   ){
-    server.get('/', async (_, res, next) => {
+    server.get('/1', async (_, res, next) => {
       try {
         const clients = await useCase.handle()
 
+        console.log(clients);
+        
         res.status(200).send(clients)
       } catch (error) {
         next(error)
