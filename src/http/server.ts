@@ -13,7 +13,7 @@ server.use(cors())
 
 server.get('/cma', (_, res) => {
   res.send({
-    mesaage: "hello, world!"
+    mesaage: " world!"
   })
 })
 
